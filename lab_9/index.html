@@ -1,0 +1,165 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>CV Generator</title>
+</head>
+<body>
+<!-- 	cv form -->
+    <div class="container" id="cv-form">
+      <div class="title">
+         <h1>CV Generator</h1>
+         <p>Лабортарын ажил - 9</p>
+      </div>
+      <div class="table-wrapper">
+        <table>
+            <div>
+                <th><h2>Хувийн мэдээлэл</h2></th>
+
+                <tr class="form-group mt-2">
+                  <th><label for="nameField">Нэр</label></th>
+                  <th><input type="text" id="nameField" class="form-control" placeholder="Нэр"></th>
+                </tr>
+
+                <tr class="form-group mt-2">
+                  <th><label for="contactField">Утасны дугаар</label></th>
+                  <th><input type="tel" id="contactField" class="form-control" placeholder="80945347"></th>
+                </tr>
+
+                <tr class="form-group mt-2">
+                  <th><label for="addressField">Гэрийн хаяг</label></th>
+                  <th><input type="text" id="addressField" class="form-control" placeholder="Гэрийн хаяг"></th>
+                </tr>
+                
+                <tr class="form-group mt-2">
+                   <th><label for="birthday">Төрсөн өдөр</label></th>
+                   <th><input type="date" id="birthday" class="form-control" placeholder="LinkedIn"></th> 
+                </tr>
+					
+					<tr class="form-group mt-3">
+                  <th><label for="imgField">Цээж зураг оруулах</label></th>
+                  <th><input id="imgField" type="file" class="form-control"></th>
+					</tr>
+
+                <tr class="form-group mt-2">
+                   <th><label for="fbField">И-майл хаяг</label></th>
+                   <th><input type="email" id="fbField" class="form-control" placeholder="И-майл хаяг"></th> 
+                </tr>
+
+                <tr class="form-group mt-2">
+                   <th><label for="igField">Хүйс</label></th>
+                   <th>
+                      <div style="display: flex;">
+                        <div style="margin-right: 8px;">
+                           <div>Эр</div>
+                           <input type="radio" id="igField" class="form-control" value="Эм" checked name="sex">
+                        </div>
+                        <div>
+                           <div>Эм</div>
+                           <input type="radio" id="igField" class="form-control" value="Эр" name="sex">
+                        </div>
+                      </div>
+                  </th> 
+                </tr>
+
+                <tr class="form-group mt-2">
+                   <th><label for="inField">LinkedIn</label></th>
+                   <th><input type="url" id="inField" class="form-control" placeholder="LinkedIn"></th> 
+                </tr>
+            </div>
+        </table>
+        <table>
+            <div>
+                <th><h2>Туршлага</h2></th>
+
+                <tr class="form-group">
+                   <th><label for="objField">Товч танилцуулга</label></th>
+                   <th><textarea id="objField" class="form-control" placeholder="Товч танилцуулга" rows="5"></textarea></th>
+                </tr>
+
+                <tr class="form-group mt-2" id="we">
+                  <th><label for="">Ажлын туршлага</label></th>
+                  <th><textarea class="form-control weField" placeholder="Ажлын туршлага" rows="3"></textarea></th>
+                  <th>
+                     <div class="container text-center mt-2" id="weAddButton">
+                        <button onclick="addNewWEField()" class="btn btn-primary btn-sm">Нэмэх</button>
+                     </div>   
+                  </th>
+                </tr>
+
+                <tr class="form-group mt-2" id="aq">
+                  <th><label for="">Боловсрол</label></th>
+                  <th><textarea class="form-control eqField" placeholder="Боловсрол" rows="3"></textarea></th>
+                  <th>
+                     <div class="container text-center mt-2" id="eqAddButton">
+                        <button onclick="addNewAQField()" class="btn btn-primary btn-sm">Нэмэх</button>
+                     </div>
+                  </th>
+                </tr>
+            </div>
+        </table>
+        </div>
+        <div class="container text-center mt-3">
+            <button onclick="generateCV()" class="btn btn-primary btn-lg">Generar CV</button>
+        </div>
+    </div>
+	<div class="container" id="cv-template">
+		<div class="row">
+			<div class="col-md-4 text-center py-5 background">
+				<img id="imgTemplate" src="https://retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" alt="default profile picture" class="img-fluid myimg">
+				<div class="container">
+					<p id="nameT1"></p>
+					<p id="contactT"></p>
+					<p id="addressT"></p>
+               <p id="birthdayT"></p>
+					<p><p id="fbT" href="#1"></p></p>
+					<p><p id="igT" href="#2"></p></p>
+					<p><p id="inT" href="#3"></p></p>
+				</div>
+			</div>
+			<div>
+				<h1 id="nameT2" class="text-center" style="font-weight: 980"></h1>
+				<div class="card mt-4">
+					<div class="card-header background">
+						<h3>Товч танилцуулга</h3>
+					</div>
+					<div class="card-body">
+						<p id="objT">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni incidunt iusto recusandae optio natus et, adipisci rerum dicta praesentium expedita distinctio eaque eos facere corporis facilis ipsa eius a omnis ut fugit quod ab voluptatem exercitationem fuga. Laboriosam libero harum quisquam consequatur nihil temporibus cupiditate assumenda, ad asperiores, non unde?</p>
+					</div>
+				</div>
+				<!-- 				work exp -->
+				<div class="card mt-4">
+					<div class="card-header background">
+						<h3>Ажлын туршлага</h3>
+					</div>
+					<div class="card-body">
+						<ul id="weT">
+							<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, consequuntur?</li>
+							<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, consequuntur?</li>
+							<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, consequuntur?</li>
+							<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, consequuntur?</li>
+						</ul>
+					</div>
+				</div>
+				<!-- 				work exp -->
+				<div class="card mt-4">
+					<div class="card-header background">
+						<h3>Боловсрол</h3>
+					</div>
+					<div class="card-body">
+						<ul id="aqT">
+							<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, consequuntur?</li>
+							<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, consequuntur?</li>
+							<li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, consequuntur?</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="app.js"></script>
+</html>
