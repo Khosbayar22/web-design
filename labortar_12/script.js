@@ -1,80 +1,73 @@
+var clock,
+    clockNum,
+    clockNumSpan,
+    clockSpanNum,
+    seprator,
+    clockArm,
+    centerClock,
+    rotateNums = 30,
+    rotateSeprator = 6,
+    clocks = document.getElementById("clock"),
+    clockSeprator = document.getElementsByClassName("sep"),
+    Nums = document.getElementsByClassName("clock-num"),
+    NumSpan = document.getElementsByClassName('number');
 
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-var radius = canvas.height / 2;
-ctx.translate(radius, radius);
-radius = radius * 0.90
-setInterval(drawClock, 1000);
+/*Undsen div iiig uusgev*/
+clock = document.createElement("Div");
+document.body.appendChild(clock);
+clock.setAttribute('id', 'clock')
 
-function drawClock() {
-  drawFace(ctx, radius);
-  drawNumbers(ctx, radius);
-  drawTime(ctx, radius);
+for (var i = 0; i < 12; i++) {
+    /*Tsagiin toonuudiin saviig oruulav*/
+    clockNum = document.createElement('div');
+    clock.appendChild(clockNum);
+    clockNum.setAttribute('class', 'clock-num');
+    /*Tsagiiin toonuudiig oruulav*/
+    clockNumSpan = document.createElement('span');
+    clockNum.appendChild(clockNumSpan);
+    clockNumSpan.setAttribute('class', 'number');
+    /*Toog oruulav*/
+    clockSpanNum = document.createTextNode(i + 1);
+    clockNumSpan.appendChild(clockSpanNum);
+    /*tsag erguulj ajiluuulah*/
+    Nums[i].style.transform = "rotate(" + rotateNums + "deg)";
+    NumSpan[i].style.transform = "rotate(-" + rotateNums + "deg)";
+    rotateNums += 30;
 }
 
-function drawFace(ctx, radius) {
-  var grad;
-  ctx.beginPath();
-  ctx.arc(0, 0, radius, 0, 2*Math.PI);
-  ctx.fillStyle = 'white';
-  ctx.fill();
-  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
-  grad.addColorStop(0, '#333');
-  grad.addColorStop(0.5, 'white');
-  grad.addColorStop(1, '#333');
-  ctx.strokeStyle = grad;
-  ctx.lineWidth = radius*0.1;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
-  ctx.fillStyle = '#333';
-  ctx.fill();
+for (var i = 0; i < 60; i++) {
+    /*Tsagiig zuug erguuleh*/
+    seprator = document.createElement('span');
+    clock.appendChild(seprator);
+    seprator.setAttribute('class', "sep");
+    clockSeprator[i].style.transform = "rotate(" + rotateSeprator + "deg)";
+    rotateSeprator += 6;
 }
 
-function drawNumbers(ctx, radius) {
-  var ang;
-  var num;
-  ctx.font = radius*0.15 + "px arial";
-  ctx.textBaseline="middle";
-  ctx.textAlign="center";
-  for(num = 1; num < 13; num++){
-    ang = num * Math.PI / 6;
-    ctx.rotate(ang);
-    ctx.translate(0, -radius*0.85);
-    ctx.rotate(-ang);
-    ctx.fillText(num.toString(), 0, 0);
-    ctx.rotate(ang);
-    ctx.translate(0, radius*0.85);
-    ctx.rotate(-ang);
-  }
+for (var i = 1; i <= 3; i++) {
+    clockArm = document.createElement('div');
+    clock.appendChild(clockArm);
+    clockArm.setAttribute('id', "Arm" + i);
 }
+/*Tsagiin zuug oruulav*/
+centerClock = document.createElement('div');
+clock.appendChild(centerClock);
+centerClock.setAttribute('id', "center");
 
-function drawTime(ctx, radius){
-    var now = new Date();
-    var hour = now.getHours();
-    var minute = now.getMinutes();
-    var second = now.getSeconds();
-    //hour
-    hour=hour%12;
-    hour=(hour*Math.PI/6)+
-    (minute*Math.PI/(6*60))+
-    (second*Math.PI/(360*60));
-    drawHand(ctx, hour, radius*0.5, radius*0.07);
-    //minute
-    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
-    drawHand(ctx, minute, radius*0.8, radius*0.07);
-    // second
-    second=(second*Math.PI/30);
-    drawHand(ctx, second, radius*0.9, radius*0.02);
-}
+myclock();
 
-function drawHand(ctx, pos, length, width) {
-    ctx.beginPath();
-    ctx.lineWidth = width;
-    ctx.lineCap = "round";
-    ctx.moveTo(0,0);
-    ctx.rotate(pos);
-    ctx.lineTo(0, -length);
-    ctx.stroke();
-    ctx.rotate(-pos);
+function myclock() {
+    var date = new Date(),
+    seconds = date.getSeconds(),
+    minutes = date.getMinutes(),
+    Hours = date.getHours(),
+    secondArm = document.getElementById("Arm1"),
+    minuteArm = document.getElementById("Arm2"),
+    HoursArm = document.getElementById("Arm3");
+
+
+    secondArm.style.transform = "rotate(" + seconds * 6 + "deg)";
+    minuteArm.style.transform = "rotate(" + (minutes * 6 + seconds / 10) + "deg)";
+    HoursArm.style.transform = "rotate(" + (Hours * 30 + +minutes / 2) + "deg)";
+    setTimeout(myclock, 500);
 }

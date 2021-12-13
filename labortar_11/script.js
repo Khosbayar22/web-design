@@ -3,6 +3,7 @@ let level = 1;
 let count = document.getElementById("count");
 let levelText = document.getElementById("level");
 let startGame = document.getElementById("startGame");
+let refreshGame = document.getElementById("resetGame");
 
 let move = function() {
     let bubbles = document.getElementsByClassName("bubble");
@@ -12,7 +13,7 @@ let move = function() {
         if(left + bubbles[i].moveX > display.clientWidth - 50 || left + bubbles[i].moveX < 0) {
             bubbles[i].moveX *= -1;
         }
-        if(top + bubbles[i].moveY > display.clientHeight - 50 || left + bubbles[i].moveY < 0) {
+        if(top + bubbles[i].moveY > display.clientHeight - 50 || top + bubbles[i].moveY < 0) {
             bubbles[i].moveY *= -1;
         }
         bubbles[i].style.left = left + bubbles[i].moveX + "px";
@@ -64,6 +65,9 @@ let beginGame = function() {
 }
 startGame.addEventListener("click", function() {
     beginGame();
+});
+refreshGame.addEventListener("click", function() {
+    window.location.reload();
 });
 
 
